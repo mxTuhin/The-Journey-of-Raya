@@ -11,7 +11,9 @@ public class KawaiObject : MonoBehaviour, IPowerUpObject
     [SerializeField] private float movementSpeed;
     private bool _moveTowardsTarget;
 
-    [SerializeField] private Transform _target;
+    private Transform _target;
+
+    [Space] [SerializeField] private ParticleSystem attackBlastParticle;
     
     public void Start()
     {
@@ -20,10 +22,10 @@ public class KawaiObject : MonoBehaviour, IPowerUpObject
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            InitiateAttackOnTarget(_target);
-        }
+        // if (Input.GetKeyDown(KeyCode.A))
+        // {
+        //     InitiateAttackOnTarget(_target);
+        // }
 
         if (_moveTowardsTarget)
         {
@@ -50,7 +52,13 @@ public class KawaiObject : MonoBehaviour, IPowerUpObject
     
     private void Attack()
     {
-        transform.DOLocalJump(_target.position, 1, 1, 0.5f);
+        transform.DOLocalJump(_target.position, 1, 1, 0.5f).OnComplete(() =>
+        {
+            ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(attackBlastParticle.gameObject).GetComponent<ParticleSystem>();
+            particleSystem.transform.position = _target.position;
+            
+            ObjectPool.GetInstance().ReturnToPool(gameObject);
+        });
         _animController.SetAttack();
     }
     

@@ -23,7 +23,7 @@ public class ObjectPool : MonoBehaviour
                 () => CreateNewObject(prefab),
                 go => go.SetActive(true),
                 go => go.SetActive(false),
-                go => Destroy(go),
+                go => DestroyImmediate(go),
                 defaultCapacity: 10,  // Initial pool capacity
                 maxSize: 100         // Maximum pool size to prevent unbounded growth
             );

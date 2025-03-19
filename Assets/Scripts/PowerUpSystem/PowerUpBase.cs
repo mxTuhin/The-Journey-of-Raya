@@ -15,6 +15,21 @@ public class PowerUpBase : MonoBehaviour
     {
         
     }
+    
+    public virtual void ActivatePowerUp(Transform target)
+    {
+        //NOTE: Send Command To UiManager
+    }
+
+    public virtual void ActivatePowerUp()
+    {
+        //NOTE: Send Command To UiManager
+    }
+    
+    public virtual void DeactivatePowerUp()
+    {
+        //NOTE: Send Command To UiManager
+    }
 
     #region Getters
 
