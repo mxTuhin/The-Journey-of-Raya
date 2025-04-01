@@ -44,7 +44,6 @@ public class CardioState : CharacterState
     
     protected void JumpAndGravity()
         {
-            Debug.Log("Jumping");
             if (Grounded)
             {
                 // reset the fall timeout timer
