@@ -126,4 +126,13 @@ public class GameManager : MonoBehaviour
     {
         return instance;
     }
+
+    #region Assist Crew
+
+    public int GetStunTimer()
+    {
+        return 3; //TODO: GET STUN TIMER FROM SAVED DATA
+    }
+
+    #endregion
 }

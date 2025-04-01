@@ -49,10 +49,33 @@ public class EnemyManager : MonoBehaviour
     
     public EnemySystem GetNearestEnemy(Vector3 position)
     {
+        return GetNearestEnemy(position, _enemies);
+    }
+    
+    public List<EnemySystem> GetMultipleNearestEnemies(Vector3 position, int number)
+    {
+        List<EnemySystem> nearestEnemies = new List<EnemySystem>();
+        List<EnemySystem> tempEnemies = new List<EnemySystem>(_enemies);
+        
+        for (int i = 0; i < number; i++)
+        {
+            EnemySystem nearestEnemy = GetNearestEnemy(position, tempEnemies);
+            if (nearestEnemy != null)
+            {
+                nearestEnemies.Add(nearestEnemy);
+                tempEnemies.Remove(nearestEnemy);
+            }
+        }
+        
+        return nearestEnemies;
+    }
+    
+    private EnemySystem GetNearestEnemy(Vector3 position, List<EnemySystem> enemies)
+    {
         EnemySystem nearestEnemy = null;
         float minDistance = float.MaxValue;
         
-        foreach (EnemySystem enemy in _enemies)
+        foreach (EnemySystem enemy in enemies)
         {
             float distance = Vector3.Distance(position, enemy.transform.position);
             if (distance < minDistance)
