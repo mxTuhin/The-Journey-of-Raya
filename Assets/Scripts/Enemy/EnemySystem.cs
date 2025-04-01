@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemySystem : MonoBehaviour
+public class EnemySystem : Humanoid
 {
     [SerializeField] private Transform headPos;
     [SerializeField] private Transform bodyPos;
@@ -20,11 +20,13 @@ public class EnemySystem : MonoBehaviour
     {
         Init();
     }
+    
 
     //TODO: INIT FROM SPAWNER
     public void Init()
     {
         OnEnemySpawn?.Invoke(this);
+        healthController.Init(100); //NOTE: Add From Enemy Data
     }
 
     public void Dead()
@@ -59,4 +61,17 @@ public class EnemySystem : MonoBehaviour
     {
         return bodyPos;
     }
+}
+
+public enum EnemyType
+{
+    Normal,
+    Elite,
+    Boss
+}
+
+public enum EnemyActionArea
+{
+    Ground,
+    Air
 }

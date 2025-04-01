@@ -19,7 +19,6 @@ public class HauntingGhostSpawner : MonoBehaviour
 
     public void Init(Transform spawnPos)
     {
-        Debug.Log(spawnPos.position);
         List<EnemySystem> enemies = EnemyManager.GetInstance().GetMultipleNearestEnemies(WorldController.GetInstance().GetPlayerController().transform.position, _enemyToTarget);
 
         if (enemies.Count > 0)
