@@ -6,7 +6,7 @@ public abstract class CharacterState : MonoBehaviour
     protected FiniteStateManager stateManager;
     
     
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimatorController animator;
     
     protected Camera _mainCamera;
     protected bool _hasAnimator;
@@ -37,7 +37,7 @@ public abstract class CharacterState : MonoBehaviour
 
     public virtual void EnterState()
     {
-        stateManager.GetController().AnimController.UpdateAnimator(animator.runtimeAnimatorController, animator.avatar);
+        stateManager.GetController().AnimController.UpdateAnimator(animator);
         gameObject.SetActive(true);
     }
 
@@ -45,4 +45,9 @@ public abstract class CharacterState : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+    
+    public virtual void ChangeTarget(EnemySystem target) { }
+    public virtual void GetClose() {}
+    public virtual void PerformAttack() {}
+    public virtual void ResetAttack() {}
 }

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : Humanoid
 {
     [SerializeField] private CharacterController _controller;
+    [SerializeField] private FiniteStateManager finiteStateManager;
     
     [Space]
     public AudioClip LandingAudioClip;
@@ -18,6 +19,12 @@ public class PlayerController : Humanoid
     private PlayerInput _playerInput;
 #endif
     private StarterAssetsInputs _input;
+    
+    [Space]
+    [Header("Custom")]
+    private bool canMove;
+    [Range(0f, 1f)]
+    public float directMoveBlend = 0f;
 
     private void Start()
     {
@@ -32,6 +39,11 @@ public class PlayerController : Humanoid
         healthController.Init(100);
     }
     
+    public FiniteStateManager GetStateManager()
+    {
+        return finiteStateManager;
+    }
+    
     public PlayerInput GetPlayerInput()
     {
         return _playerInput;
@@ -43,6 +55,24 @@ public class PlayerController : Humanoid
     }
 
     public override bool IsMoving => _input.move.magnitude > 0 && !IsJumping && !IsSprinting;
+    
+    public override bool IsLightAttack
+    {
+        get => _input.lightAttack;
+        set => _input.lightAttack = value;
+    }
+
+    public override bool IsHeavyAttack
+    {
+        get => _input.heavyAttack;
+        set => _input.heavyAttack = value;
+    }
+
+    public override bool CanMove
+    {
+        get => CanMove;
+        set => canMove = value;
+    }
 
     public override bool IsJumping => _input.jump;
     
@@ -71,5 +101,24 @@ public class PlayerController : Humanoid
         }
     }
     
+    #endregion
+
+    #region AttackAnimEvents
+
+    public void GetClose()
+    {
+        finiteStateManager.attackState.GetClose();
+    }
+    
+    public void PerformAttack()
+    {
+        finiteStateManager.attackState.PerformAttack();
+    }
+    
+    public void ResetAttack()
+    {
+        finiteStateManager.attackState.ResetAttack();
+    }
+
     #endregion
 }

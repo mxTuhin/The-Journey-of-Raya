@@ -60,10 +60,21 @@ public class FiniteStateManager : MonoBehaviour
         currentState.enabled = true; //NOTE: Enable the new state
         currentState.EnterState();
     }
+    
+    public CharacterState GetAttackState()
+    {
+        return attackState;
+    }
 
 
     public bool IsMoving() => GetController().IsMoving ;
     
+    public bool CanMove
+    {
+        get => GetController().CanMove;
+        set => GetController().CanMove = value;
+    }
+
     public bool IsJumping() => GetController().IsJumping;
     
     public bool IsDead() => GetController().IsDead();
@@ -72,7 +83,21 @@ public class FiniteStateManager : MonoBehaviour
     public bool IsAttacking() => GetController().IsAttacking;
     public bool IsCrouching() => GetController().IsCrouching;
     public bool IsLadderClimbing() => GetController().IsLadderClimbing;
-    
+
+    public bool IsLightAttack
+    {
+        get => GetController().IsLightAttack;
+        set => GetController().IsLightAttack = value;
+    }
+
+    public bool IsHeavyAttack
+    {
+        get => GetController().IsHeavyAttack;
+        set => GetController().IsHeavyAttack = value;
+    }
+
+    public AttackType AttackType { get; set; }
+
     public StarterAssetsInputs GetInput()
     {
         return playerObject.GetInput();

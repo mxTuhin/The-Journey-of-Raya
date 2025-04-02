@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySystem : Humanoid
 {
@@ -9,6 +10,9 @@ public class EnemySystem : Humanoid
     
     [Header("Stun System")]
     [SerializeField] private ParticleSystem stunParticle;
+
+    [SerializeField] private ParticleSystem hitParticle;
+    [SerializeField] private ParticleSystem heavyHitParticle;
 
     private bool _isStunned;
     
@@ -60,6 +64,20 @@ public class EnemySystem : Humanoid
     public Transform GetBodyPos()
     {
         return bodyPos;
+    }
+    
+    public void SpawnHitVfx(Vector3 hitPos, AttackType attackType)
+    {
+        ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(hitParticle.gameObject).GetComponent<ParticleSystem>();
+        particleSystem.transform.position = hitPos+Random.insideUnitSphere*0.25f;
+        particleSystem.Play();
+        
+        if(attackType == AttackType.Heavy)
+        {
+            ParticleSystem heavyParticle = ObjectPool.GetInstance().GetObject(heavyHitParticle.gameObject).GetComponent<ParticleSystem>();
+            heavyParticle.transform.position = hitPos+Random.insideUnitSphere*0.5f;
+            heavyParticle.Play();
+        }
     }
 }
 

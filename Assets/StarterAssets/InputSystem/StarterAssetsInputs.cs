@@ -12,6 +12,8 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool lightAttack;
+		public bool heavyAttack;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +45,16 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+		
+		public void OnLightAttack(InputValue value)
+		{
+			LightAttackInput(value.isPressed);
+		}
+		public void OnHeavyAttack(InputValue value)
+		{
+			HeavyAttackInput(value.isPressed);
+		}
+		
 #endif
 
 
@@ -64,6 +76,16 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+		
+		public void LightAttackInput(bool newLightAttackState)
+		{
+			lightAttack = newLightAttackState;
+		}
+		
+		public void HeavyAttackInput(bool newHeavyAttackState)
+		{
+			heavyAttack = newHeavyAttackState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

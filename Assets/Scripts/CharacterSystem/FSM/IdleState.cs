@@ -14,13 +14,13 @@ public class IdleState : CardioState
     
     private void StateControl()
     {
-        if ((stateManager.IsMoving() || stateManager.IsSprinting()) && !stateManager.IsCrouching() && !stateManager.IsLadderClimbing() && !stateManager.IsAttacking() && !stateManager.IsJumping())
+        if ((stateManager.IsMoving() || stateManager.IsSprinting()) && !stateManager.IsCrouching() && !stateManager.IsLadderClimbing() && !stateManager.IsJumping())
             stateManager.ChangeState(stateManager.moveState);
         
         if (stateManager.IsDead())
             stateManager.ChangeState(stateManager.deadState);
         
-        if (stateManager.IsAttacking())
+        if (stateManager.IsLightAttack || stateManager.IsHeavyAttack)
             stateManager.ChangeState(stateManager.attackState);
 
         if (stateManager.IsCrouching())

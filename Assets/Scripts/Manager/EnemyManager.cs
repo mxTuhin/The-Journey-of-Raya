@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+
+    [SerializeField] private TargetDetectionController targetDetectionController;
+    
     private List<EnemySystem> _enemies = new List<EnemySystem>();
     
     private static EnemyManager instance;
@@ -86,6 +89,11 @@ public class EnemyManager : MonoBehaviour
         }
         
         return nearestEnemy;
+    }
+    
+    public TargetDetectionController GetTargetDetectionController()
+    {
+        return targetDetectionController;
     }
     
     public static EnemyManager GetInstance()

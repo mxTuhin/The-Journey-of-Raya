@@ -19,6 +19,13 @@ public class AnimController
     public static readonly int AnimIDFreeFall = Animator.StringToHash("FreeFall");
     public static readonly int AnimIDMotionSpeed = Animator.StringToHash("MotionSpeed");
     
+    //Combat System
+    public static readonly int AnimPunch = Animator.StringToHash("punch");
+    public static readonly int AnimKick = Animator.StringToHash("kick");
+    public static readonly int AnimMmaKick = Animator.StringToHash("mmakick");
+    public static readonly int AnimHeavyAttack1 = Animator.StringToHash("heavyAttack1");
+    public static readonly int AnimHeavyAttack2 = Animator.StringToHash("heavyAttack2");
+    
     
     private Animator animator;
     
@@ -28,10 +35,9 @@ public class AnimController
     }
     
     //NOTE: Update the Animator Properties
-    public void UpdateAnimator(RuntimeAnimatorController animator, Avatar avatar)
+    public void UpdateAnimator(RuntimeAnimatorController animator)
     {
         this.animator.runtimeAnimatorController = animator;
-        this.animator.avatar = avatar;
     }
     
     //NOTE: Update the Animator Reference

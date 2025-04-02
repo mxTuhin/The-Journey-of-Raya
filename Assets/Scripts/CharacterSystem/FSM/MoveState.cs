@@ -51,6 +51,12 @@ public class MoveState : MovingState
 
         if (stateManager.IsLadderClimbing())
             stateManager.ChangeState(stateManager.climbState);
+
+        if (stateManager.IsLightAttack || stateManager.IsHeavyAttack)
+        {
+            stateManager.AttackType = stateManager.IsLightAttack ? AttackType.Light : AttackType.Heavy;
+            stateManager.ChangeState(stateManager.attackState);
+        }
     }
 
     private void Move() {

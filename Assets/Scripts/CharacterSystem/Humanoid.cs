@@ -10,11 +10,14 @@ public class Humanoid : MonoBehaviour
     [SerializeField] protected HealthController healthController;
 
     protected bool _isMoving;
+    protected bool _canMove;
     protected bool _isJumping;
     protected bool _isSprinting;
     protected bool _isAttacking;
     protected bool _isCrouching;
     protected bool _isLadderClimbing;
+    protected bool isLightAttack;
+    protected bool isHeavyAttack;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -42,6 +45,12 @@ public class Humanoid : MonoBehaviour
     {
         get => _isMoving;
         set => _isMoving = value;
+    }
+    
+    public virtual bool CanMove
+    {
+        get => true;
+        set => _canMove = value;
     }
 
     public virtual bool IsJumping
@@ -74,5 +83,17 @@ public class Humanoid : MonoBehaviour
     {
         get => _isLadderClimbing;
         set => _isLadderClimbing = value;
+    }
+    
+    public virtual bool IsLightAttack
+    {
+        get => isLightAttack;
+        set => isLightAttack = value;
+    }
+    
+    public virtual bool IsHeavyAttack
+    {
+        get => isHeavyAttack;
+        set => isHeavyAttack = value;
     }
 }
