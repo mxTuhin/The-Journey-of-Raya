@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CardioState : CharacterState
 {
+    [Space] [SerializeField] protected CharacterController _controller;
+    
     [Header("Player Grounded")]
     [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
     public bool Grounded = true;

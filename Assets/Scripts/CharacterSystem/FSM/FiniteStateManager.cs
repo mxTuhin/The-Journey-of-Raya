@@ -5,9 +5,14 @@ using UnityEngine.Serialization;
 
 public class FiniteStateManager : MonoBehaviour
 {
-    [SerializeField] private Humanoid characterObject;
-    public Humanoid GetCharacterObject() => characterObject;
-    
+    [SerializeField] private CharacterType characterType;
+    [SerializeField] private PlayerController playerObject;
+    [SerializeField] private EnemySystem enemySystem;
+    public Humanoid GetController()
+    {
+        return characterType == CharacterType.Player ? playerObject : enemySystem;
+    }
+
     [Header("State References")]
     public CharacterState idleState;
     public CharacterState moveState;
@@ -18,21 +23,8 @@ public class FiniteStateManager : MonoBehaviour
 
     private CharacterState currentState;
 
-    
-#if ENABLE_INPUT_SYSTEM 
-    private PlayerInput _playerInput;
-#endif
-    private StarterAssetsInputs _input;
-
     void Start()
     {
-        
-        _input = GetComponent<StarterAssetsInputs>();
-        #if ENABLE_INPUT_SYSTEM 
-        _playerInput = GetComponent<PlayerInput>();
-        #else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-        #endif
         
         idleState.Initialize(this);
         moveState?.Initialize(this);
@@ -70,26 +62,27 @@ public class FiniteStateManager : MonoBehaviour
     }
 
 
-    public bool IsMoving() => _input.move.magnitude > 0.1f && !IsJumping() && !IsSprinting();
+    public bool IsMoving() => GetController().IsMoving ;
     
-    public bool IsJumping() => _input.jump;
+    public bool IsJumping() => GetController().IsJumping;
     
-    public bool IsDead() => false;
+    public bool IsDead() => GetController().IsDead();
     
-    public bool IsSprinting() => _input.sprint;
-    public bool IsAttacking() => false;
-    public bool IsCrouching() => false;
-    public bool IsLadderClimbing() => false;
+    public bool IsSprinting() => GetController().IsInvoking();
+    public bool IsAttacking() => GetController().IsAttacking;
+    public bool IsCrouching() => GetController().IsCrouching;
+    public bool IsLadderClimbing() => GetController().IsLadderClimbing;
     
     public StarterAssetsInputs GetInput()
     {
-        return _input;
+        return playerObject.GetInput();
     }
     
     public PlayerInput GetPlayerInput()
     {
-        return _playerInput;
+        return playerObject.GetPlayerInput();
     }
+    
 }
 
 public enum CharacterType

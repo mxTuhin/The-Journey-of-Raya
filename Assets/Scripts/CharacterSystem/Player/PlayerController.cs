@@ -1,6 +1,7 @@
 using System;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class PlayerController : Humanoid
@@ -11,6 +12,44 @@ public class PlayerController : Humanoid
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
+    
+        
+#if ENABLE_INPUT_SYSTEM 
+    private PlayerInput _playerInput;
+#endif
+    private StarterAssetsInputs _input;
+
+    private void Start()
+    {
+        _input = GetComponent<StarterAssetsInputs>();
+        #if ENABLE_INPUT_SYSTEM 
+        _playerInput = GetComponent<PlayerInput>();
+        #else
+			            Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+        #endif
+        
+        //NOTE: Init Health
+        healthController.Init(100);
+    }
+    
+    public PlayerInput GetPlayerInput()
+    {
+        return _playerInput;
+    }
+    
+    public StarterAssetsInputs GetInput()
+    {
+        return _input;
+    }
+
+    public override bool IsMoving => _input.move.magnitude > 0 && !IsJumping && !IsSprinting;
+
+    public override bool IsJumping => _input.jump;
+    
+    public override bool IsSprinting => _input.sprint;
+   
+
+    #region AnimEvents
     
     private void OnFootstep(AnimationEvent animationEvent)
     {
@@ -31,4 +70,6 @@ public class PlayerController : Humanoid
             AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
         }
     }
+    
+    #endregion
 }

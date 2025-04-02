@@ -360,7 +360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  _controller: {fileID: 0}
 --- !u!4 &301466433
 Transform:
   m_ObjectHideFlags: 0
@@ -437,7 +436,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  _controller: {fileID: 0}
 --- !u!4 &355063417
 Transform:
   m_ObjectHideFlags: 0
@@ -626,7 +624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  _controller: {fileID: 0}
 --- !u!4 &728352297
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,7 +2251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bda15dda2bea4dc794f57b58b9cbed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterObject: {fileID: 1762682272}
+  characterType: 0
+  playerObject: {fileID: 1762682272}
+  enemySystem: {fileID: 0}
   idleState: {fileID: 279008044}
   moveState: {fileID: 1091649998}
   crouchState: {fileID: 2146240614}
@@ -2859,6 +2858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146240615}
+  - component: {fileID: 2146240616}
   - component: {fileID: 2146240614}
   m_Layer: 8
   m_Name: Crouch
@@ -2879,8 +2879,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6779f1aa869d4e8593320170c3b64c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  _controller: {fileID: 0}
+  animator: {fileID: 2146240616}
+  _controller: {fileID: 4416926083347132233}
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.28
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  JumpHeight: 1.2
+  Gravity: -15
+  JumpTimeout: 0.5
+  FallTimeout: 0.15
+  MoveSpeed: 2
+  SprintSpeed: 5
+  CrouchSpeed: 1.5
+  RotationSmoothTime: 0.12
+  SpeedChangeRate: 10
+  CinemachineCameraTarget: {fileID: 0}
+  TopClamp: 70
+  BottomClamp: -30
+  CameraAngleOverride: 0
+  LockCameraPosition: 0
 --- !u!4 &2146240615
 Transform:
   m_ObjectHideFlags: 0
@@ -2896,6 +2916,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 119070587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2146240616
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146240613}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &117881534856477948
 Transform:
   m_ObjectHideFlags: 0

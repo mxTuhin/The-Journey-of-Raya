@@ -7,8 +7,6 @@ public abstract class CharacterState : MonoBehaviour
     
     
     [SerializeField] private Animator animator;
-
-    [Space] [SerializeField] protected CharacterController _controller;
     
     protected Camera _mainCamera;
     protected bool _hasAnimator;
@@ -30,16 +28,16 @@ public abstract class CharacterState : MonoBehaviour
     {
         this.stateManager = fsm;
         _mainCamera = Camera.main;
-        _hasAnimator = stateManager.GetCharacterObject().AnimController != null;
+        _hasAnimator = stateManager.GetController().AnimController != null;
         if (_hasAnimator)
         {
-            _animController = stateManager.GetCharacterObject().AnimController;
+            _animController = stateManager.GetController().AnimController;
         }
     }
 
     public virtual void EnterState()
     {
-        stateManager.GetCharacterObject().AnimController.UpdateAnimator(animator.runtimeAnimatorController, animator.avatar);
+        stateManager.GetController().AnimController.UpdateAnimator(animator.runtimeAnimatorController, animator.avatar);
         gameObject.SetActive(true);
     }
 
