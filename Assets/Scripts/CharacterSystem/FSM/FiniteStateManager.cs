@@ -68,7 +68,7 @@ public class FiniteStateManager : MonoBehaviour
     
     public bool IsDead() => GetController().IsDead();
     
-    public bool IsSprinting() => GetController().IsInvoking();
+    public bool IsSprinting() => GetController().IsSprinting;
     public bool IsAttacking() => GetController().IsAttacking;
     public bool IsCrouching() => GetController().IsCrouching;
     public bool IsLadderClimbing() => GetController().IsLadderClimbing;

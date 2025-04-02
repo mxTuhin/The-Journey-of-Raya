@@ -37,7 +37,7 @@ public class MoveState : MovingState
 
     private void StateControl()
     {
-        if (_animationBlend <= 0)
+        if (_animationBlend <= 0 && !stateManager.IsSprinting())
             stateManager.ChangeState(stateManager.idleState);
 
         if (stateManager.IsDead())
@@ -68,11 +68,7 @@ public class MoveState : MovingState
 
             float speedOffset = 0.1f;
             float inputMagnitude = stateManager.GetInput().analogMovement ? stateManager.GetInput().move.magnitude : 1f;
-
-            if (stateManager.IsJumping() && stateManager.IsSprinting())
-            {
-                targetSpeed = MoveSpeed;
-            }
+            
 
             // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
@@ -108,10 +104,26 @@ public class MoveState : MovingState
 
                 // rotate to face input direction relative to camera position
                 stateManager.GetController().transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                
+                //NOTE: Check if target rotation reached
+                if ((Mathf.Abs(_targetRotation - rotation) <= 1 || Mathf.Abs(_targetRotation - rotation) >=359))
+                {
+                    // Mathf.Lerp(_speed / 1.1f, _speed, Time.deltaTime * SpeedChangeRate);
+                }
+                else
+                {
+                    if(stateManager.IsSprinting())
+                        _speed /= 1.1f;
+                }
             }
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+            if (!Grounded && stateManager.IsSprinting())
+            {
+                _speed/=1.2f;
+            }
+            
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
@@ -123,7 +135,6 @@ public class MoveState : MovingState
                 _animController.SetFloat(AnimController.AnimIDMotionSpeed, inputMagnitude);
             }
     }
-
     
     public override void EnterState()
     {

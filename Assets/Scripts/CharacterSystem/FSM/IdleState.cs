@@ -14,7 +14,7 @@ public class IdleState : CardioState
     
     private void StateControl()
     {
-        if (stateManager.IsMoving() && !stateManager.IsCrouching() && !stateManager.IsLadderClimbing() && !stateManager.IsAttacking() && !stateManager.IsJumping())
+        if ((stateManager.IsMoving() || stateManager.IsSprinting()) && !stateManager.IsCrouching() && !stateManager.IsLadderClimbing() && !stateManager.IsAttacking() && !stateManager.IsJumping())
             stateManager.ChangeState(stateManager.moveState);
         
         if (stateManager.IsDead())
