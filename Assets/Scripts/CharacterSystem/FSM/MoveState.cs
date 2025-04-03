@@ -52,7 +52,7 @@ public class MoveState : MovingState
         if (stateManager.IsLadderClimbing())
             stateManager.ChangeState(stateManager.climbState);
 
-        if (stateManager.IsLightAttack || stateManager.IsHeavyAttack)
+        if ((stateManager.IsLightAttack || stateManager.IsHeavyAttack) && Grounded)
         {
             stateManager.AttackType = stateManager.IsLightAttack ? AttackType.Light : AttackType.Heavy;
             stateManager.ChangeState(stateManager.attackState);
@@ -152,5 +152,10 @@ public class MoveState : MovingState
     {
         base.ExitState();
         Debug.Log("Exiting Walk State");
+    }
+
+    public override bool IsGrounded()
+    {
+        return Grounded;
     }
 }

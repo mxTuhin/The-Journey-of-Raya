@@ -50,4 +50,9 @@ public abstract class CharacterState : MonoBehaviour
     public virtual void GetClose() {}
     public virtual void PerformAttack() {}
     public virtual void ResetAttack() {}
+
+    public virtual bool IsGrounded()
+    {
+        return true;
+    }
 }

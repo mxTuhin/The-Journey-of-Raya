@@ -11,7 +11,7 @@ public class Humanoid : MonoBehaviour
 
     protected bool _isMoving;
     protected bool _canMove;
-    protected bool _isJumping;
+    protected bool _hasJumped;
     protected bool _isSprinting;
     protected bool _isAttacking;
     protected bool _isCrouching;
@@ -53,10 +53,10 @@ public class Humanoid : MonoBehaviour
         set => _canMove = value;
     }
 
-    public virtual bool IsJumping
+    public virtual bool HasJumped
     {
-        get => _isJumping;
-        set => _isJumping = value;
+        get => _hasJumped;
+        set => _hasJumped = value;
     }
 
     public bool IsDead() => healthController.IsDead;

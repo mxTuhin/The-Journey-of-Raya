@@ -54,7 +54,7 @@ public class PlayerController : Humanoid
         return _input;
     }
 
-    public override bool IsMoving => _input.move.magnitude > 0 && !IsJumping && !IsSprinting;
+    public override bool IsMoving => _input.move.magnitude > 0 && !HasJumped && !IsSprinting;
     
     public override bool IsLightAttack
     {
@@ -74,7 +74,7 @@ public class PlayerController : Humanoid
         set => canMove = value;
     }
 
-    public override bool IsJumping => _input.jump;
+    public override bool HasJumped => _input.jump;
     
     public override bool IsSprinting => _input.sprint;
    

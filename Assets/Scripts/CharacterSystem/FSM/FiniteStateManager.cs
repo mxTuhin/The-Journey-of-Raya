@@ -75,7 +75,7 @@ public class FiniteStateManager : MonoBehaviour
         set => GetController().CanMove = value;
     }
 
-    public bool IsJumping() => GetController().IsJumping;
+    public bool HasJumped() => GetController().HasJumped;
     
     public bool IsDead() => GetController().IsDead();
     
@@ -83,6 +83,7 @@ public class FiniteStateManager : MonoBehaviour
     public bool IsAttacking() => GetController().IsAttacking;
     public bool IsCrouching() => GetController().IsCrouching;
     public bool IsLadderClimbing() => GetController().IsLadderClimbing;
+    public bool IsGrounded() => moveState.IsGrounded();
 
     public bool IsLightAttack
     {
