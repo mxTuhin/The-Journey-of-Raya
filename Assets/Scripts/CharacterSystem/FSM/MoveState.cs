@@ -30,6 +30,8 @@ public class MoveState : MovingState
     {
         StateControl();
         
+        TakeInput();
+        
         JumpAndGravity();
         GroundedCheck();
         Move();
@@ -43,16 +45,17 @@ public class MoveState : MovingState
         if (stateManager.IsDead())
             stateManager.ChangeState(stateManager.deadState);
 
-        if (stateManager.IsAttacking())
-            stateManager.ChangeState(stateManager.attackState);
-
-        if (stateManager.IsCrouching())
+        if (stateManager.IsCrouching && !stateManager.IsEvading && stateManager.GetInput().move.magnitude <= 0)
+        {
+            // _animController.CrossFadeInFixedTime(AnimController.CrouchIdle, 0.05f);
             stateManager.ChangeState(stateManager.crouchState);
+        }
+        
 
         if (stateManager.IsLadderClimbing())
             stateManager.ChangeState(stateManager.climbState);
 
-        if ((stateManager.IsLightAttack || stateManager.IsHeavyAttack) && Grounded)
+        if ((stateManager.IsLightAttack || stateManager.IsHeavyAttack))
         {
             stateManager.AttackType = stateManager.IsLightAttack ? AttackType.Light : AttackType.Heavy;
             stateManager.ChangeState(stateManager.attackState);
@@ -157,5 +160,12 @@ public class MoveState : MovingState
     public override bool IsGrounded()
     {
         return Grounded;
+    }
+    
+    public override void ResetAttack()
+    {
+        Debug.Log("Crouch Reset");
+        stateManager.IsCrouching = false;
+        stateManager.IsEvading = false;
     }
 }

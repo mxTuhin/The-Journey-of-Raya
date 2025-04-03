@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovingState : CardioState
@@ -17,6 +18,4 @@ public class MovingState : CardioState
     protected float _animationBlend;
     protected float _targetRotation = 0.0f;
     protected float _rotationVelocity;
-    
-    
 }

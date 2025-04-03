@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -37,19 +38,33 @@ public abstract class CharacterState : MonoBehaviour
 
     public virtual void EnterState()
     {
+        _animController.GetAnimator().applyRootMotion = false;
         stateManager.GetController().AnimController.UpdateAnimator(animator);
-        gameObject.SetActive(true);
+        // StartCoroutine(ChangeAnimatorController(animator));
+        // gameObject.SetActive(true);
+    }
+    
+    protected IEnumerator ChangeAnimatorController(RuntimeAnimatorController animator)
+    {
+        yield return new WaitForSeconds(0.1f);
+        stateManager.GetController().AnimController.UpdateAnimator(animator);
     }
 
     public virtual void ExitState()
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
     }
     
     public virtual void ChangeTarget(EnemySystem target) { }
+
+    #region AnimationaEvents
+
     public virtual void GetClose() {}
     public virtual void PerformAttack() {}
     public virtual void ResetAttack() {}
+
+    #endregion
+    
 
     public virtual bool IsGrounded()
     {

@@ -14,6 +14,8 @@ namespace StarterAssets
 		public bool sprint;
 		public bool lightAttack;
 		public bool heavyAttack;
+		public bool crouch;
+		public float crouchValue;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -55,6 +57,12 @@ namespace StarterAssets
 			HeavyAttackInput(value.isPressed);
 		}
 		
+		public void OnCrouch(InputValue value)
+		{
+			CrouchValueInput(value.Get<float>());
+			CrouchInput(value.isPressed);
+		}
+		
 #endif
 
 
@@ -86,6 +94,17 @@ namespace StarterAssets
 		public void HeavyAttackInput(bool newHeavyAttackState)
 		{
 			heavyAttack = newHeavyAttackState;
+		}
+		
+		public void CrouchInput(bool newCrouchState)
+		{
+			if(newCrouchState)
+				crouch = !crouch;
+		}
+		
+		public void CrouchValueInput(float newCrouchValue)
+		{
+			crouchValue = newCrouchValue;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

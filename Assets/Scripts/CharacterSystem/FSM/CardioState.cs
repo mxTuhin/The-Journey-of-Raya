@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CardioState : CharacterState
@@ -37,6 +38,8 @@ public class CardioState : CharacterState
     
     protected float _verticalVelocity;
     protected float _terminalVelocity = 53.0f;
+
+    private bool _evadeCallInit;
 
     protected void VerticalMove()
     {
@@ -126,5 +129,30 @@ public class CardioState : CharacterState
         {
             _animController.SetBool(AnimController.AnimIDGrounded, Grounded);
         }
+    }
+    
+    protected virtual void TakeInput()
+    {
+        if(stateManager.IsCrouching && stateManager.GetInput().move.magnitude >0 && !_evadeCallInit)
+            Evade();
+    }
+    
+    
+    protected virtual void Evade()
+    {
+        StartCoroutine(HandleRootMotion(0.45f));
+        _animController.SetTrigger(AnimController.Evade);
+    }
+    
+    private IEnumerator HandleRootMotion(float timer)
+    {
+        stateManager.IsEvading = true;
+        _evadeCallInit = true;
+        _animController.GetAnimator().applyRootMotion = true;
+        yield return new WaitForSeconds(timer);
+        _animController.GetAnimator().applyRootMotion = false;
+        stateManager.IsCrouching = false;
+        _evadeCallInit = false;
+        stateManager.IsEvading = false;
     }
 }

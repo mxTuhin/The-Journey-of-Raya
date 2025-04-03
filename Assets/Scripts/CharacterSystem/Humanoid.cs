@@ -15,6 +15,7 @@ public class Humanoid : MonoBehaviour
     protected bool _isSprinting;
     protected bool _isAttacking;
     protected bool _isCrouching;
+    protected bool _isEvading;
     protected bool _isLadderClimbing;
     protected bool isLightAttack;
     protected bool isHeavyAttack;
@@ -77,6 +78,16 @@ public class Humanoid : MonoBehaviour
     {
         get => _isCrouching;
         set => _isCrouching = value;
+    }
+    
+    public virtual bool IsEvading
+    {
+        get => _isEvading;
+        set => _isEvading = value;
+    }
+    public virtual float GetCrouchValue()
+    {
+        return _isCrouching ? 1 : 0;
     }
 
     public virtual bool IsLadderClimbing

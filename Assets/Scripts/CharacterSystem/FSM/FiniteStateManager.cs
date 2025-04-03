@@ -65,6 +65,10 @@ public class FiniteStateManager : MonoBehaviour
     {
         return attackState;
     }
+    public CharacterState GetCurrentState()
+    {
+        return currentState;
+    }
 
 
     public bool IsMoving() => GetController().IsMoving ;
@@ -81,7 +85,21 @@ public class FiniteStateManager : MonoBehaviour
     
     public bool IsSprinting() => GetController().IsSprinting;
     public bool IsAttacking() => GetController().IsAttacking;
-    public bool IsCrouching() => GetController().IsCrouching;
+    public bool IsCrouching
+    {
+        get => GetController().IsCrouching;
+        set => GetController().IsCrouching = value;
+    }
+    public bool IsEvading
+    {
+        get => GetController().IsEvading;
+        set => GetController().IsEvading = value;
+    }
+    public float GetCrouchValue()
+    {
+        return GetController().GetCrouchValue();
+    }
+
     public bool IsLadderClimbing() => GetController().IsLadderClimbing;
     public bool IsGrounded() => moveState.IsGrounded();
 

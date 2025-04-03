@@ -77,7 +77,17 @@ public class PlayerController : Humanoid
     public override bool HasJumped => _input.jump;
     
     public override bool IsSprinting => _input.sprint;
-   
+    public override bool IsCrouching
+    {
+        get => _input.crouch;
+        set => _input.crouch = value;
+    }
+    
+    public override float GetCrouchValue()
+    {
+        return _input.crouchValue;
+    }
+
 
     #region AnimEvents
     
@@ -107,17 +117,17 @@ public class PlayerController : Humanoid
 
     public void GetClose()
     {
-        finiteStateManager.attackState.GetClose();
+        finiteStateManager.GetCurrentState().GetClose();
     }
     
     public void PerformAttack()
     {
-        finiteStateManager.attackState.PerformAttack();
+        finiteStateManager.GetCurrentState().PerformAttack();
     }
     
     public void ResetAttack()
     {
-        finiteStateManager.attackState.ResetAttack();
+        finiteStateManager.GetCurrentState().ResetAttack();
     }
 
     #endregion

@@ -3015,24 +3015,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6779f1aa869d4e8593320170c3b64c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 9100000, guid: 66f0db25cf551428ea202b3c3bb8998b, type: 2}
+  animator: {fileID: 9100000, guid: eea6e668eb1314edd98f95d314a4b73c, type: 2}
   _controller: {fileID: 4416926083347132233}
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   JumpHeight: 1.2
   Gravity: -15
   JumpTimeout: 0.5
   FallTimeout: 0.15
-  MoveSpeed: 2
+  MoveSpeed: 1.5
   SprintSpeed: 5
   CrouchSpeed: 1.5
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
-  CinemachineCameraTarget: {fileID: 0}
+  CinemachineCameraTarget: {fileID: 8338988565591873048}
   TopClamp: 70
   BottomClamp: -30
   CameraAngleOverride: 0
@@ -3102,6 +3102,8 @@ MonoBehaviour:
   sprint: 0
   lightAttack: 0
   heavyAttack: 0
+  crouch: 0
+  crouchValue: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -5167,7 +5169,7 @@ Animator:
   m_GameObject: {fileID: 4416926083347132227}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
-  m_Controller: {fileID: 9100000, guid: 66f0db25cf551428ea202b3c3bb8998b, type: 2}
+  m_Controller: {fileID: 9100000, guid: f0bec29455de14817b1bc1d8efd8581a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

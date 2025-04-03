@@ -1,9 +1,16 @@
 using System;
+using System.Collections;
 using UnityEditor.Animations;
 using UnityEngine;
 
 public class AnimController
 {
+    
+    //NOTE Universal
+    public static readonly int MovementBlend = Animator.StringToHash("MovementBlend");
+    public static readonly int CrouchIdle = Animator.StringToHash("CrouchIdle");
+    public static readonly int BaseIdle = Animator.StringToHash("BaseIdle");
+    
     //NOTE: Anim Hash
     private static readonly int Move = Animator.StringToHash("Move");
     private static readonly int Idle = Animator.StringToHash("Idle");
@@ -11,6 +18,8 @@ public class AnimController
     private static readonly int Die = Animator.StringToHash("Die");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Jump = Animator.StringToHash("Jump");
+    
+    public static readonly int Evade = Animator.StringToHash("Evade");
     
     // animation IDs
     public static readonly int AnimIDSpeed = Animator.StringToHash("Speed");
@@ -37,7 +46,9 @@ public class AnimController
     //NOTE: Update the Animator Properties
     public void UpdateAnimator(RuntimeAnimatorController animator)
     {
+        float lastBlendValue = this.animator.GetFloat(AnimIDSpeed);
         this.animator.runtimeAnimatorController = animator;
+        this.animator.SetFloat(AnimIDSpeed, lastBlendValue);
     }
     
     //NOTE: Update the Animator Reference
@@ -85,5 +96,20 @@ public class AnimController
     public void SetBool(int id, bool value)
     {
         animator.SetBool(id, value);
+    }
+    
+    public void SetTrigger(int id)
+    {
+        animator.SetTrigger(id);
+    }
+    
+    public void CrossFadeInFixedTime(int id, float transitionDuration)
+    {
+        animator.CrossFadeInFixedTime(id, transitionDuration);
+    }
+    
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 }

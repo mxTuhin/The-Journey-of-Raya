@@ -351,7 +351,6 @@ public class AttackState : CharacterState
 
     private void FinishAttack()
     {
-        Debug.Log("Finishing");
         stateManager.IsLightAttack = false;
         stateManager.IsHeavyAttack = false;
         currentAttackType = AttackType.None;
