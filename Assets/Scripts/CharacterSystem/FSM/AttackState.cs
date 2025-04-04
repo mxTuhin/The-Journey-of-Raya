@@ -358,7 +358,7 @@ public class AttackState : CharacterState
         isAttacking = false;
         attackFinished = true;
         
-        Invoke(nameof(ChangeBackToMoveState), 0.25f);
+        Invoke(nameof(ChangeBackToMoveState), 0.125f);
     }
     
     private void ChangeBackToMoveState()

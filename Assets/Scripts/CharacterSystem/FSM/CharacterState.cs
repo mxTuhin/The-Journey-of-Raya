@@ -29,17 +29,17 @@ public abstract class CharacterState : MonoBehaviour
     {
         this.stateManager = fsm;
         _mainCamera = Camera.main;
-        _hasAnimator = stateManager.GetController().AnimController != null;
+        _hasAnimator = stateManager.GetController().GetAnimController != null;
         if (_hasAnimator)
         {
-            _animController = stateManager.GetController().AnimController;
+            _animController = stateManager.GetController().GetAnimController;
         }
     }
 
     public virtual void EnterState()
     {
         _animController.GetAnimator().applyRootMotion = false;
-        stateManager.GetController().AnimController.UpdateAnimator(animator);
+        stateManager.GetController().GetAnimController.UpdateAnimator(animator);
         // StartCoroutine(ChangeAnimatorController(animator));
         // gameObject.SetActive(true);
     }
@@ -47,7 +47,7 @@ public abstract class CharacterState : MonoBehaviour
     protected IEnumerator ChangeAnimatorController(RuntimeAnimatorController animator)
     {
         yield return new WaitForSeconds(0.1f);
-        stateManager.GetController().AnimController.UpdateAnimator(animator);
+        stateManager.GetController().GetAnimController.UpdateAnimator(animator);
     }
 
     public virtual void ExitState()

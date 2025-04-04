@@ -71,6 +71,7 @@ public class EnemySystem : Humanoid
         ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(hitParticle.gameObject).GetComponent<ParticleSystem>();
         particleSystem.transform.position = hitPos+Random.insideUnitSphere*0.25f;
         particleSystem.Play();
+        GetAnimController.CrossFadeInFixedTime(AnimController.GetHit, 0.15f);
         
         if(attackType == AttackType.Heavy)
         {

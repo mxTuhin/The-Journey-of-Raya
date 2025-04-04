@@ -36,7 +36,7 @@ public class Humanoid : MonoBehaviour
         return healthController;
     }
     
-    public AnimController AnimController
+    public AnimController GetAnimController
     {
         get => _animController;
         set => _animController = value;

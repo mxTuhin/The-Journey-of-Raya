@@ -497,7 +497,7 @@ ModelImporter:
     second: root
   - first:
       74: 7400000
-    second: Take 001
+    second: HeavyAttack3
   - first:
       95: 9500000
     second: //RootNode
@@ -514,15 +514,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'thigh_l'
-      : position error = 8.652343 mm\n\t'calf_l' : position error = 2.653363 mm\n\t'thigh_r'
-      : position error = 7.645137 mm\n\t'calf_r' : position error = 2.505921 mm\n\t'upperarm_l'
-      : position error = 1.534918 mm\n\t'lowerarm_l' : position error = 1.529994
-      mm\n\t'hand_l' : position error = 6.477552 mm\n\t'middle_03_l' : position error
-      = 1.026833 mm\n\t'upperarm_r' : position error = 1.917455 mm\n\t'hand_r' :
-      position error = 3.963915 mm\n\t'middle_03_r' : position error = 1.024621 mm\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -561,7 +552,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: HeavyAttack3
       takeName: Take 001
       internalID: 7400000
       firstFrame: 0
@@ -1389,8 +1380,7 @@ ModelImporter:
     - name: Bone012
       parentName: Bone011
       position: {x: -0.28616843, y: -0.0000009155273, z: 0.000000019073486}
-      rotation: {x: -2.3283067e-10, y: -0.0000000063027983, z: -0.0000000018626451,
-        w: 1}
+      rotation: {x: -2.3283067e-10, y: -0.0000000063027983, z: -0.0000000018626451, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Bone001
       parentName: spine_03
@@ -1494,8 +1484,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 659c7284dc1e16a4bbbf3d746380383e,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 659c7284dc1e16a4bbbf3d746380383e, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

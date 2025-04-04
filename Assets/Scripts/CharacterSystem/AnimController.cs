@@ -12,12 +12,12 @@ public class AnimController
     public static readonly int BaseIdle = Animator.StringToHash("BaseIdle");
     
     //NOTE: Anim Hash
-    private static readonly int Move = Animator.StringToHash("Move");
-    private static readonly int Idle = Animator.StringToHash("Idle");
-    private static readonly int Attack = Animator.StringToHash("Attack");
-    private static readonly int Die = Animator.StringToHash("Die");
-    private static readonly int Hit = Animator.StringToHash("Hit");
-    private static readonly int Jump = Animator.StringToHash("Jump");
+    public static readonly int Move = Animator.StringToHash("Move");
+    public static readonly int Idle = Animator.StringToHash("Idle");
+    public static readonly int Attack = Animator.StringToHash("Attack");
+    public static readonly int Die = Animator.StringToHash("Die");
+    public static readonly int GetHit = Animator.StringToHash("GetHit");
+    public static readonly int Jump = Animator.StringToHash("Jump");
     
     public static readonly int Evade = Animator.StringToHash("Evade");
     
@@ -62,25 +62,9 @@ public class AnimController
         animator.CrossFadeInFixedTime(Move, 0);
     }
     
-    
-    public void SetIdle()
-    {
-        animator.CrossFadeInFixedTime(Idle, 0);
-    }
-    
     public void SetAttack()
     {
         animator.CrossFadeInFixedTime(Attack, 0);
-    }
-    
-    public void SetDie()
-    {
-        animator.CrossFadeInFixedTime(Die, 0);
-    }
-    
-    public void SetHit()
-    {
-        animator.CrossFadeInFixedTime(Hit, 0);
     }
     
     public void SetJump()
