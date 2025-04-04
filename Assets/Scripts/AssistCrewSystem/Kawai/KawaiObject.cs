@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class KawaiObject : MonoBehaviour, IAssistCrewObject
 {
@@ -11,7 +12,8 @@ public class KawaiObject : MonoBehaviour, IAssistCrewObject
     [SerializeField] private float movementSpeed;
     private bool _moveTowardsTarget;
 
-    private Transform _target;
+    private EnemySystem _target;
+    private Vector3 _targetPosition;
 
     [Space] [SerializeField] private ParticleSystem attackBlastParticle;
     
@@ -26,10 +28,10 @@ public class KawaiObject : MonoBehaviour, IAssistCrewObject
         if (_moveTowardsTarget)
         {
             //NOTE: Object Move Towards Target and Attach When Reach
-            transform.position = Vector3.MoveTowards(transform.position, _target.position, movementSpeed*Time.deltaTime);
-            transform.LookAt(_target);
+            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, movementSpeed*Time.deltaTime);
+            transform.LookAt(_targetPosition);
             
-            Vector3 direction = _target.position - transform.position;
+            Vector3 direction = _targetPosition - transform.position;
             float distanceSqr = direction.sqrMagnitude;
             if (distanceSqr <= 1f)
             {
@@ -39,19 +41,20 @@ public class KawaiObject : MonoBehaviour, IAssistCrewObject
         }
     }
 
-    public void InitiateAttackOnTarget(Transform target)
+    public void InitiateAttackOnTarget(EnemySystem target)
     {
         _target = target;
+        _targetPosition = target.GetBodyPos().position + Random.insideUnitSphere * 0.5f;
         _moveTowardsTarget = true;
         _animController.SetMove();
     }
     
     private void Attack()
     {
-        transform.DOLocalJump(_target.position, 1, 1, 0.5f).OnComplete(() =>
+        transform.DOLocalJump(_targetPosition, 1, 1, 0.5f).OnComplete(() =>
         {
             ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(attackBlastParticle.gameObject).GetComponent<ParticleSystem>();
-            particleSystem.transform.position = _target.position;
+            particleSystem.transform.position = _targetPosition;
             
             Reset();
             ObjectPool.GetInstance().ReturnToPool(gameObject);

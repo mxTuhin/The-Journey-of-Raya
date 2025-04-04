@@ -15,7 +15,7 @@ public class KawaiAttack : AssistCrewBase
         base.Start();
     }
     
-    public override void ActivatePowerUp(Transform target)
+    public override void ActivatePowerUp(EnemySystem target)
     {
         base.ActivatePowerUp();
         if(_spawnRoutine!=null) 
@@ -24,7 +24,7 @@ public class KawaiAttack : AssistCrewBase
         StartCoroutine(_spawnRoutine);
     }
 
-    private IEnumerator SpawnKawaiSlimeRoutine(Transform target)
+    private IEnumerator SpawnKawaiSlimeRoutine(EnemySystem target)
     {
         Transform spawnPos = WorldController.GetInstance().GetPlayerController().transform;
         ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(powerUpSpawnParticle.gameObject).GetComponent<ParticleSystem>();

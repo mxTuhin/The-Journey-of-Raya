@@ -19,9 +19,14 @@ public class AssistCrewBase : MonoBehaviour
         
     }
     
-    public virtual void ActivatePowerUp(Transform target)
+    public virtual void ActivatePowerUp(EnemySystem target)
     {
         //NOTE: Send Command To UiManager
+    }
+
+    public virtual void ActivatePowerUp(Transform target)
+    {
+        
     }
 
     public virtual void ActivatePowerUp(List<Transform> targets)

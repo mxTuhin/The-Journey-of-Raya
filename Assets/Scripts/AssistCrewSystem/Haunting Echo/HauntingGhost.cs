@@ -7,6 +7,7 @@ public class HauntingGhost : MonoBehaviour, IAssistCrewObject
     private AnimController _animController;
 
     private EnemySystem _target;
+    private Transform _targetTransform;
     
     [SerializeField] private float movementSpeed;
     private bool _moveTowardsTarget = false;
@@ -23,10 +24,10 @@ public class HauntingGhost : MonoBehaviour, IAssistCrewObject
         if (_moveTowardsTarget)
         {
             //NOTE: Object Move Towards Target and Attach When Reach
-            transform.position = Vector3.MoveTowards(transform.position, _target.GetHeadPos().position, movementSpeed*Time.deltaTime);
-            transform.LookAt(_target.transform);
+            transform.position = Vector3.MoveTowards(transform.position, _targetTransform.position, movementSpeed*Time.deltaTime);
+            transform.LookAt(_targetTransform);
             
-            Vector3 direction = _target.transform.position - transform.position;
+            Vector3 direction = _targetTransform.position - transform.position;
             float distanceSqr = direction.sqrMagnitude;
             if (distanceSqr <= 0.25f)
             {
@@ -39,7 +40,7 @@ public class HauntingGhost : MonoBehaviour, IAssistCrewObject
     private void Attack()
     {
         ParticleSystem particleSystem = ObjectPool.GetInstance().GetObject(attackBlastParticle.gameObject).GetComponent<ParticleSystem>();
-        particleSystem.transform.position = _target.transform.position;
+        particleSystem.transform.position = _targetTransform.position;
         
         _target.InitStunEffect(GameManager.GetInstance().GetStunTimer());
         
@@ -51,6 +52,7 @@ public class HauntingGhost : MonoBehaviour, IAssistCrewObject
     public void Init(EnemySystem target)
     {
         _target = target;
+        _targetTransform = target.GetHeadPos();
         _moveTowardsTarget = true;
     }
     

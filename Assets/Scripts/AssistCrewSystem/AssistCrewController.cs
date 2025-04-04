@@ -20,7 +20,7 @@ public class AssistCrewController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            kawaiAttack.ActivatePowerUp(_enemyManager.GetNearestEnemy(_playerController.transform.position).transform);
+            kawaiAttack.ActivatePowerUp(_enemyManager.GetNearestEnemy(_playerController.transform.position));
         }
         else if (Input.GetKeyDown(KeyCode.U))
         {
