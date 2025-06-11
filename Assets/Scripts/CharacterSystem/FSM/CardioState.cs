@@ -39,7 +39,9 @@ public class CardioState : CharacterState
     protected float _verticalVelocity;
     protected float _terminalVelocity = 53.0f;
 
-    private bool _evadeCallInit;
+    protected bool _evadeCallInit;
+
+    protected bool _crouchEvade;
 
     protected void VerticalMove()
     {
@@ -134,24 +136,29 @@ public class CardioState : CharacterState
     protected virtual void TakeInput()
     {
         if(stateManager.IsCrouching && stateManager.GetInput().move.magnitude >0 && !_evadeCallInit)
-            Evade();
+            Evade(timer: 0.45f, setCrouchFlag: false);
     }
     
     
-    protected virtual void Evade()
+    protected virtual void Evade(float timer, bool setCrouchFlag)
     {
-        StartCoroutine(HandleRootMotion(0.45f));
+        StartCoroutine(HandleRootMotion(timer, setCrouchFlag));
         _animController.SetTrigger(AnimController.Evade);
     }
     
-    private IEnumerator HandleRootMotion(float timer)
+    private IEnumerator HandleRootMotion(float timer, bool setCrouchFlag)
     {
+        if(setCrouchFlag)
+            stateManager.IsCrouching = true;
         stateManager.IsEvading = true;
         _evadeCallInit = true;
         _animController.GetAnimator().applyRootMotion = true;
         yield return new WaitForSeconds(timer);
         _animController.GetAnimator().applyRootMotion = false;
-        stateManager.IsCrouching = false;
+        stateManager.IsCrouching = setCrouchFlag;
+        // yield return new WaitForSeconds(0.25f);
+        // stateManager.IsCrouching = setCrouchFlag;
+        // yield return new WaitForSeconds(0.15f);
         _evadeCallInit = false;
         stateManager.IsEvading = false;
     }

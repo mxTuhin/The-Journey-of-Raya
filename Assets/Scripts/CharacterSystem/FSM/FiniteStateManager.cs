@@ -20,6 +20,7 @@ public class FiniteStateManager : MonoBehaviour
     public CharacterState attackState;
     public CharacterState climbState;
     public CharacterState deadState;
+    public CharacterState meleeState;
 
     private CharacterState currentState;
 
@@ -32,6 +33,7 @@ public class FiniteStateManager : MonoBehaviour
         attackState?.Initialize(this);
         climbState?.Initialize(this);
         deadState?.Initialize(this);
+        meleeState?.Initialize(this);
         
         //NOTE: Disable all states initially
         idleState.enabled = false;
@@ -40,6 +42,7 @@ public class FiniteStateManager : MonoBehaviour
         if (attackState != null) attackState.enabled = false;
         if (climbState != null) climbState.enabled = false;
         if (deadState != null) deadState.enabled = false;
+        if (meleeState != null) meleeState.enabled = false;
 
         ChangeState(idleState);
         
@@ -89,6 +92,12 @@ public class FiniteStateManager : MonoBehaviour
     {
         get => GetController().IsCrouching;
         set => GetController().IsCrouching = value;
+    }
+
+    public bool InSetCrouch
+    {
+        get => GetController().InSetCrouch;
+        set => GetController().InSetCrouch = value;
     }
     public bool IsEvading
     {

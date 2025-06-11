@@ -83,6 +83,12 @@ public class PlayerController : Humanoid
         set => _input.crouch = value;
     }
     
+    public override bool InSetCrouch
+    {
+        get => _input.InSetCrouch;
+        set => _input.InSetCrouch = value;
+    }
+    
     public override float GetCrouchValue()
     {
         return _input.crouchValue;

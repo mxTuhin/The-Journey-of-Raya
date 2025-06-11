@@ -220,6 +220,8 @@ public class AttackState : CharacterState
 
     public override void ResetAttack() // Animation Event ---- for Reset Attack
     {
+        stateManager.IsCrouching = false; //NOTE: Deal this with method
+        stateManager.IsEvading = false;
         if(debug)
             Debug.Log("Reset Inside");
         _animController.SetBool(AnimController.AnimPunch, false);

@@ -4,7 +4,7 @@ public class CrouchState : MoveState
 {
     void Update()
     {
-        // TakeInput();
+        TakeInput();
         
         JumpAndGravity();
         GroundedCheck();
@@ -116,6 +116,15 @@ public class CrouchState : MoveState
                 _animController.SetFloat(AnimController.AnimIDMotionSpeed, inputMagnitude);
             }
     }
+    
+    protected override void TakeInput()
+    {
+        if (stateManager.InSetCrouch && stateManager.GetInput().move.magnitude > 0 && !_evadeCallInit)
+        {
+            Evade(timer: 0.7f, setCrouchFlag: true);
+        }
+            
+    }
 
     
     public override void EnterState()
@@ -135,7 +144,7 @@ public class CrouchState : MoveState
     public override void ResetAttack()
     {
         Debug.Log("Crouch Reset");
-        stateManager.IsCrouching = false;
+        // stateManager.IsCrouching = false; //NOTE: Deal this with method
         stateManager.IsEvading = false;
     }
 

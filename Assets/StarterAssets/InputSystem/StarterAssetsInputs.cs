@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -16,6 +17,7 @@ namespace StarterAssets
 		public bool heavyAttack;
 		public bool crouch;
 		public float crouchValue;
+		public bool InSetCrouch;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -98,8 +100,22 @@ namespace StarterAssets
 		
 		public void CrouchInput(bool newCrouchState)
 		{
-			if(newCrouchState)
+			if(InSetCrouch)
+				return;
+			if (newCrouchState)
+			{
+				if (crouch)
+				{
+					Debug.Log("In Set");
+					InSetCrouch = true;
+					Invoke(nameof(ResetInSetCrouch), 0.1f);
+					// return;
+				}
+				
+				Debug.Log("Crouch Set");
 				crouch = !crouch;
+			}
+				
 		}
 		
 		public void CrouchValueInput(float newCrouchValue)
@@ -115,6 +131,11 @@ namespace StarterAssets
 		private void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+		}
+
+		private void ResetInSetCrouch()
+		{
+			InSetCrouch = false;
 		}
 	}
 	
